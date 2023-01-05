@@ -1,0 +1,341 @@
+<app-button></app-button>
+<div class="container-fluid">
+    <div class="row mainbar">
+        <div class="col-12" style="padding-top: 12px;">
+            <img src="../../assets/logo1.jpg" alt="">
+            <!-- <span class="header">Ashwitha</span> -->
+            <span class="h1"> Projects Dashboard {{showTime()}}
+            <!-- <div class="clock" id="digitalClock" (onload)="showTime()" > {{date}}</div> -->
+            <span class="clock">{{totalTime}}</span>
+            </span>
+        </div>
+    </div>
+    <div class="row mainsection">
+        <div class="col-2 sidenav">
+            <div class="personicon">
+                <mat-icon class="matIcon">person</mat-icon>
+                <span class="account">{{name}}</span>
+            </div>
+            <div class="list">
+                <div class="head">
+                    <span> Projects</span>
+                    <button mat-mini-fab aria-label="Example icon button with a plus one icon" style="position:relative;
+                    margin-left:20px;background-color:#f00c0c;" data-toggle="modal" data-target="#myModal" (click)="resetForm()">
+                        <mat-icon>add_circle</mat-icon>
+                    </button>
+                </div>
+                <ul *ngFor="let project of projects;let i = index" class="projectUnList">
+                    <li class="projectList">
+                        <a (click) = "getSections(project.project_id)">{{project.project_name}}  </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!--sidenav closed-->
+        <!--side content started-->
+        <div class="col-10 sidecontent" *ngIf="show">
+            <!--side content header started-->
+            <div class="row">
+                <div class="col-12 sidecontentbody">
+                    <p class="secHeader"><marquee>Sections under the {{projectName}}</marquee> </p>
+                     <!--side content body started-->
+                    <p *ngIf="!sectionListEmpty" class="sectionListempty">Sections are not available under this.</p>
+                    <div *ngIf="sectionListEmpty">
+                    <ul *ngFor="let section of sections;let i = index" class="sectionList">
+                        <li class="sectionList1">
+                            <a (click) = "getTasks(section.section_id)" > 
+                                <i style='font-size:24px' class='fas' *ngIf="!section.toggle">&#xf13a;</i> 
+                                <i style='font-size:24px' class='fas' *ngIf="section.toggle">&#xf139;</i>
+                                <span *ngIf="!section.toggle"  id="getSection">{{section.section_name}}  </span>
+                                <span *ngIf="section.toggle" style="text-decoration:underline;">{{section.section_name}}  </span>
+                            </a>
+                        </li>
+                        <!--task list started-->
+                        <div class="row" *ngIf="section.toggle">
+                            <div class="col-12" style="text-align: center;">
+                                <span style="font-size: 16px;
+                                font-weight: 600;
+                                color: orangered;text-decoration: underline;">Tasks</span>
+                                <a (click)="addTask()" id="a3" style="float: right;
+                                margin-right: 19px;" matTooltip="Add Task" matTooltipPosition="above" matTooltipClass="add">
+                                    <i style="font-size: 28px;
+                                    color: orangered;margin-bottom: 2px;" class="fa">&#xf055;</i>
+                                </a>
+                            </div>
+                            <div class="col-12 tablebody">
+                                <table>
+                                        <thead>
+                                            <tr>
+                                                <th *ngFor="let col of keys"> {{col | uppercase}}</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let task of tasks; let i=index">
+                                                <td *ngFor="let col of keys">
+                                                    <span *ngIf="col == 'task_id'">
+                                                        <input type="text" [(ngModel)]="task.task_id" *ngIf="task.edit" />
+                                                        <span *ngIf="!task.edit">{{ task.task_id}}</span>
+                                      
+                                                    </span>
+                                                    <span *ngIf="col == 'task_name'"> 
+                                                        <input type="text" [(ngModel)]="task.task_name"  *ngIf="task.edit"/>
+                                                        <span *ngIf="!task.edit">{{task.task_name}}  </span>
+                                                    </span>
+                                                    <span *ngIf="col == 'task_assigned_by'"> 
+                                                        <input type="text" [(ngModel)]="task.task_assigned_by" *ngIf="task.edit"/>
+                                                        <span *ngIf="!task.edit">{{task.task_assigned_by}}</span>
+                                                    </span>
+                                                    <span *ngIf="col == 'task_taken_by'"> 
+                                                        <input type="text" [(ngModel)]="task.task_taken_by" *ngIf="task.edit"/>
+                                                        <span *ngIf="!task.edit"> {{task.task_taken_by}} </span>
+                                                    </span>
+                                                    <span *ngIf="col == 'task_status'"> 
+                                                      <input type="text" [(ngModel)]="task.task_status" *ngIf="task.edit"/>
+                                                      <span *ngIf="!task.edit && task.task_status === 'new'" 
+                                                      class="newClass"> 
+                                                      {{task.task_status}} </span>
+                                                      <span *ngIf="!task.edit && task.task_status === 'in_progress'" 
+                                                      class="inprogressClass"> 
+                                                      {{task.task_status}} </span>
+                                                      <span *ngIf="!task.edit && task.task_status === 'completed'" 
+                                                      class="completed"> 
+                                                      {{task.task_status}} </span>
+                                                  </span>
+
+
+                                                    <!-- <span *ngIf="col == 'task_status' && !task.edit">
+                                                          <input type="text" [(ngModel)]="task.task_status"  [disabled]="!task.edit" 
+                                                          [ngClass]="task.task_status === 'new'? 'newClass': ''" *ngIf="task.task_status === 'new'"/>
+                                                          <input type="text" [(ngModel)]="task.task_status"  [disabled]="!task.edit" 
+                                                          [ngClass]="task.task_status === 'in_progress'? 'inprogressClass': '' " *ngIf="task.task_status === 'in_progress'"/>
+                                                          <input type="text" [(ngModel)]="task.task_status"  [disabled]="!task.edit" 
+                                                          [ngClass]="task.task_status === 'completed'? 'completed': '' " *ngIf="task.task_status === 'completed'"/>
+                                                    </span>
+                                                    <span *ngIf="col == 'task_status' && task.edit">
+                                                      <input type="text" [(ngModel)]="task.task_status"  [disabled]="!task.edit" />
+                                                    </span> -->
+
+                                                  
+                                                    <span *ngIf="col == 'edit'">
+                                                        <a (click)="editTask(task, i)" id="a1" *ngIf="!task.edit"
+                                                        matTooltip="edit" matTooltipPosition="left" matTooltipClass="edit">
+                                                            <i class="fas fa-pencil-alt" style="color: green;
+                                                            font-size: 17px;
+                                                            margin-right: 8px;"></i>
+                                                          </a>
+                                                    
+                                                          <a
+                                                            (click)="updateTask(task, i)"
+                                                            id="a1"
+                                                            *ngIf="task.edit"
+                                                            style="color:green; cursor:pointer"
+                                                            matTooltip="save/update" matTooltipPosition="left" matTooltipClass="save"
+                                                          >
+                                                          <i class="material-icons" style="font-weight: 600;
+                                                          margin-right: 2px;font-size: 24px;">&#xe876;</i>
+                                                          </a>
+                                                          <a
+                                                            (click)="cancel(task)"
+                                                            id="a1"
+                                                            *ngIf="task.edit"
+                                                            style="color:red; cursor:pointer"
+                                                            matTooltip="cancel" matTooltipPosition="below" matTooltipClass="cancel"
+                                                          >
+                                                          <i style="font-size: 22px;
+                                                          margin-left: 2px;" class="fa">&#xf00d;</i>
+                                                          </a>
+                                                          <a (click)="deleteTask(task)" id="a2" *ngIf="!task.edit"
+                                                          matTooltip="delete" matTooltipPosition="below" matTooltipClass="delete">
+                                                            <i class="fas fa-trash-alt" style="color: red;font-size: 15px;
+                                                            margin-left: 2px;"></i
+                                                          ></a>
+                                                    </span>
+                                                </td>
+                                                <!-- <td>
+                                                    <a (click)="editTask(task, i)" id="a1" *ngIf="!enableEdit && !task.edit">
+                                                      <i class="fas fa-pencil-alt" style="color: green"></i>
+                                                    </a>
+                                              
+                                                    <a
+                                                      (click)="updateTask(task, i)"
+                                                      id="a1"
+                                                      *ngIf="task.edit"
+                                                      style="color:green; cursor:pointer"
+                                                    >
+                                                      save
+                                                    </a>
+                                                    <a
+                                                      (click)="cancel(task)"
+                                                      id="a1"
+                                                      *ngIf="task.edit"
+                                                      style="color:red; cursor:pointer"
+                                                    >
+                                                      cancel
+                                                    </a>
+                                                    <a (click)="deleteTask(task)" id="a2" *ngIf="!enableEdit && !task.edit"
+                                                      ><i class="fas fa-trash-alt" style="color: red"></i
+                                                    ></a>
+                                                  </td> -->
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                        </div>
+                          <!--task list end-->
+                    </ul>
+                    </div>
+                    <!--side content body closed-->
+                </div>
+            </div>
+            <!--side content header closed-->
+        </div>
+        <!--side content closed-->
+    </div>
+</div>
+
+<!-- The Modal started-->
+<div class="modal" id="myModal">
+  <!--modal dialog started-->
+  <div class="modal-dialog modal-dialog-centered">
+    <!--modal content started-->
+    <div class="modal-content">
+      <!--modal body started-->
+      <div class="modal-body">
+        <h4 class="modal-title"> Create New Project</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <form [formGroup]="projectForm" action="" style="margin:5px;" novalidate>
+            <!--project id started-->
+            <div class="form-field">
+              <label for="projectid">Project ID</label>
+              <input type="text" name="projectid" formControlName="project_id" style="margin-left: 16px;" 
+              placeholder="Enter project id">
+            </div>
+            <div *ngIf="projectForm.controls['project_id'].invalid && (projectForm.controls['project_id'].dirty || 
+              projectForm.controls['project_id'].touched)" class="alert">
+              <div *ngIf="projectForm.controls['project_id'].errors?.required">
+                please enter project id
+              </div>
+              <div *ngIf="projectForm.controls['project_id'].errors?.minlength">
+                project id must be atleast 3 chars
+              </div>
+            </div>
+            <!--project id ended-->
+
+            <!--project name started -->
+            <div class="form-field">
+              <label for="projectname">Project Name</label>
+              <input type="text" name="projectname" formControlName="project_name" style="margin-left:-10px;"
+              placeholder="Enter project name">
+            </div>
+            <div *ngIf="projectForm.controls['project_name'].invalid && (projectForm.controls['project_name'].dirty || 
+              projectForm.controls['project_name'].touched)" class="alert">
+              <div *ngIf="projectForm.controls['project_name'].errors?.required">
+                please enter project name
+              </div>
+              <div *ngIf="projectForm.controls['project_name'].errors?.minlength">
+                project name must be atleast 5 chars
+              </div>
+            </div> 
+            <!--project name ended -->
+
+            <!--project start date started -->
+            <div class="form-field">
+              <label for="projectstartdate">Project Start Date</label>
+              <input type="date" name="projectstartdate" formControlName="project_start_date" min="2015-01-01" 
+              (click)="calculate()" max="maxStartDate" (change)="compare1(projectForm.controls['project_start_date'])" style="margin-left:-37px;"
+              placeholder="Select project start date">
+            </div>
+            <div *ngIf="projectForm.controls['project_start_date'].dirty && !startDate" class="alert">
+              please select start date should be less than or equal to {{maxStartDate}}
+            </div>
+            <div *ngIf="projectForm.controls['project_start_date'].invalid && (projectForm.controls['project_start_date'].dirty || 
+              projectForm.controls['project_start_date'].touched)" class="alert">
+              <div *ngIf="projectForm.controls['project_start_date'].errors?.required">
+                please select project start date its required
+              </div>
+            </div>
+            <!--project start date ended -->
+
+            <!--project end date started -->
+            <div class="form-field">
+              <label for="projectenddate">Project End Date</label>
+                <input type="date" name="projectenddate" formControlName="project_end_date" (click)="dateFilter(projectForm.controls
+                ['project_start_date'])" min="minEndDate" max="maxEndDate" (change)="compare(projectForm.controls['project_start_date'], 
+                projectForm.controls['project_end_date'])"
+                style="margin-left:-30px;"
+                placeholder="Select project end date">
+            </div>
+            <div *ngIf="projectForm.controls['project_end_date'].dirty && !endDate" class="alert">
+              project end date should be greater than {{projectForm.controls['project_start_date'].value}}
+            </div>
+            <div *ngIf="projectForm.controls['project_end_date'].dirty && !endDate1" class="alert">
+              project end date should be less than {{maxEndDate}}
+            </div>
+            <div *ngIf="projectForm.controls['project_end_date'].dirty && !endDate2" class="alert">
+              project end date should be greater than {{minEndDate}}
+            </div>
+            <div *ngIf="projectForm.controls['project_end_date'].invalid && (projectForm.controls['project_end_date'].dirty || 
+              projectForm.controls['project_end_date'].touched)" class="alert">
+              <div *ngIf="projectForm.controls['project_end_date'].errors?.required">
+                please select project end date its required
+              </div>
+              <div *ngIf="projectForm.controls['project_end_date'].errors?.minEndDate">
+                please select end date more than {{minEndDate}}
+              </div>
+              <div *ngIf="projectForm.controls['project_end_date'].errors?.maxEndDate">
+                please select end date less than {{maxEndDate}}
+              </div>
+            </div>
+            <!--project end date ended-->
+
+            <!--project status started-->
+            <div class="form-field">
+              <label for="projectstatus">Project Status</label>
+              <select name="projectstatus"  formControlName="project_status" style="margin-left:-13px;"> 
+                <option value="status" *ngFor="let status of statuses">{{status}}</option>
+              </select>
+            </div>
+            <div *ngIf="projectForm.controls['project_status'].invalid && (projectForm.controls['project_status'].dirty || 
+              projectForm.controls['project_status'].touched)" class="alert">
+                <div *ngIf="projectForm.controls['project_status'].errors?.required">
+                  please select project status it is required
+                </div>
+            </div>
+            <!--project status ended-->
+            
+            <!--buttons started-->
+            <div class="buttons">
+              <button class="btn btn-warning submit" type="submit" [disabled]="!projectForm.valid" (click)="addProject()"
+                data-dismiss="modal"> Submit </button>
+              <button type="button" class="btn btn-danger reset" data-toggle="modal" data-target="#myAlertmodal"
+              >Reset</button>
+            </div>
+          </form>
+      </div>  
+      <!--modal body ended-->
+    </div>
+    <!--modal content ended-->
+  </div>
+  <!--modal dialog ended-->
+</div>
+<!--modal closed-->
+
+<!--modal started-->
+<div class="modal" id="myAlertmodal" style="background-color: lightgray;">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body">
+        <p style="margin-top:10px;">It will reset data you entered are you sure you want to continue?</p>
+        <div class="modal-footer buttons">
+          <button class="btn btn-primary submit1" type="button"(click)="resetForm()"
+          data-dismiss="modal"> Ok </button>
+          <button class="btn btn-warning cancel1" type="button"
+          data-dismiss="modal"> Cancel </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--modal closed-->
+
+<app-footer></app-footer>

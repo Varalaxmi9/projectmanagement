@@ -1,0 +1,100 @@
+<!--modal started-->
+    <div class="modal-content-wrapper">
+      <div class="modal-body">
+        <h4 class="modal-title"> Registration Form </h4>
+        <!-- <button type="button" class="close" data-dismiss="modal" (click)="closeModal()">&times;</button> -->
+        <form [formGroup]="userForm" novalidate>
+        <div class="row">
+            <div class="form-field col-12">
+              <label for="name"> Name </label>
+              <input type="text" name="name" class="form-control" formControlName="name" ngModel>
+            </div>
+            <div *ngIf="userForm.controls['name'].invalid && (userForm.controls['name'].dirty || 
+            userForm.controls['name'].touched)" class="alert">
+            <div *ngIf="userForm.controls['name'].errors?.required">
+              please enter name
+            </div>
+            <div *ngIf="userForm.controls['name'].errors?.minlength">
+              name must be atleast 5 chars
+            </div>
+          </div> 
+        </div>
+        <div class="row">
+          <div class="form-field col-12">
+            <label for="email"> Email </label>
+            <input type="email" name="email" class="form-control" formControlName="email" ngModel>
+          </div>
+          <div *ngIf="userForm.controls['email'].invalid && (userForm.controls['email'].dirty || 
+          userForm.controls['email'].touched)" class="alert">
+          <div *ngIf="userForm.controls['email'].errors?.required">
+            please enter email
+          </div>
+          <div *ngIf="userForm.controls['email'].errors?.email">
+            email should be like abc@gmail.com
+          </div>
+        </div> 
+        </div>
+        <div class="row">
+          <div class="form-field col-12">
+            <label for="userName"> UserName </label>
+            <input type="text" name="userName" class="form-control"formControlName="userName" ngModel>
+          </div>
+          <div *ngIf="userForm.controls['userName'].invalid && (userForm.controls['userName'].dirty || 
+          userForm.controls['userName'].touched)" class="alert">
+            <div *ngIf="userForm.controls['userName'].errors?.required">
+              please enter username
+            </div>
+            <div *ngIf="userForm.controls['userName'].errors?.minlength">
+              username must be atleast 4 chars
+            </div>
+            <div *ngIf="userForm.controls['userName'].errors?.maxlength">
+              username must be atmost 10 chars
+            </div>
+          </div> 
+        </div>
+        <div class="row">
+          <div class="form-field col-6">
+            <label for="password"> Password</label>
+            <input type="password" name="password" class="form-control" formControlName="password" ngModel>
+            <div *ngIf="userForm.controls['password'].invalid && (userForm.controls['password'].dirty || 
+              userForm.controls['password'].touched)" class="alert" style="margin-left: -14px;">
+              <div *ngIf="userForm.controls['password'].errors?.required">
+                please enter password
+              </div>
+              <div *ngIf="userForm.controls['password'].errors?.pattern">
+                password contain atleast 1 small and capital letter, number and special symbol
+              </div>
+            </div>
+          </div> 
+          <div class="form-field col-6">
+            <label for="confirmpassword"> Conform password </label>
+            <input type="password" name="confirmpassword" class="form-control" formControlName="confirmpassword" ngModel (change)=
+            "checkPassword(userForm.controls['password'],userForm.controls['confirmpassword'])">
+            <div *ngIf="userForm.controls['confirmpassword'].invalid && (userForm.controls['confirmpassword'].dirty || 
+                userForm.controls['confirmpassword'].touched)" class="alert" style="margin-left: -14px;">
+                  <div *ngIf="userForm.controls['confirmpassword'].errors?.required" >
+                  please enter confirm password 
+                  </div>
+                  <div *ngIf="userForm.controls['confirmpassword'].errors?.minlength">
+                  password contain atleast 1 small and capital letter, number and special symbol
+                  </div>
+            </div>
+         </div> 
+        </div>
+        <div class="row" style="margin-top: 15px;">
+          <div class="col-12">
+            <p> If you have already account please click on <a routerLink="/login" (click)="closeModal()">Login</a> here</p>
+          </div>
+        </div>
+        <div class="buttons">
+          <button class="btn btn-primary submit" type="submit" [disabled]="!userForm.valid" (click)="addUser(userForm)"
+            >Submit</button>
+            <button class="btn btn-danger reset" type="button" (click)="resetForm()" 
+            >Reset</button>
+            <button class="btn btn-warning reset1" type="button" (click)="closeModal()" 
+            >Cancel</button>
+        </div>
+        </form>
+      </div>
+    </div>
+<!--modal closed-->

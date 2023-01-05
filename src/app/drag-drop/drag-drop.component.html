@@ -1,0 +1,105 @@
+<!-- <p>drag-drop works!</p>
+<h2>Movies</h2>
+<div cdkDropList class="moviesList" (cdkDropListDropped)="drop($event)">
+    <div class="box" *ngFor="let movie of movies" cdkDrag>
+        <div class="custom-placeholder" *cdkDragPlaceholder></div>
+        {{movie}}
+    </div>
+</div> -->
+<app-button></app-button>
+ <!--container starts here-->
+<div class="container-fluid">
+    <!--form row starts here-->
+    <div class="row">
+        <div class="col-12">
+            <form [formGroup]="userForm">
+                <div class="form-group">
+                    <div class="form-row">
+                        <div class="col-3">
+                            <label for="taskName"> Task Name</label>
+                            <input type="text" name="taskName" formControlName="taskName" class="form-control">
+                        </div>
+                        <div class="col-6">
+                            <label for="taskDescription"> Task Description</label>
+                            <input type="text" name="taskDescription"  formControlName="taskDescription" class="form-control">
+                        </div>
+                        <div class="col-2"> 
+                            <button type="submit" class="btn-secondary" (click)="addToList()"> Add Task </button>
+                        </div>
+                    </div>
+                </div>
+            </form>        
+        </div>
+    </div>
+    <!--form row ends here -->
+
+     <!--form body starts here-->
+    <div cdkDropListGroup class="row formbody">
+         <!--col 1 starts here-->
+        <div class="col-3">
+            <div class="container">
+                <h2 class="todo"> To Do </h2>
+                <div cdkDropList [cdkDropListData]="Todo" class="moviesList" (cdkDropListDropped)="drop($event)" >
+                    <div class="box" *ngFor="let item of Todo" cdkDrag>
+                        <div>
+                            <span> {{item.taskName}} </span>
+                            <p>{{item.taskDescription}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--col 1 ends here-->
+        <!--col 2 starts here-->
+        <div class="col-3">
+            <div class="container">
+                <h2  class="doing"> Doing </h2>
+                <div cdkDropList [cdkDropListData]="Doing" class="moviesList" (cdkDropListDropped)="drop($event)" >
+                    <div class="box" *ngFor="let item of Doing" cdkDrag>
+                        <div>
+                            <span> {{item.taskName}} </span>
+                            <p> {{item.taskDescription}} </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--col 2 ends here-->
+        <!--col 3 starts here-->
+        <div class="col-3">
+            <div class="container">
+                <h2  class="testing"> Testing </h2>
+                <div cdkDropList [cdkDropListData]="Testing" class="moviesList" (cdkDropListDropped)="drop($event)" >
+                    <div class="box" *ngFor="let item of Testing" cdkDrag>
+                        <div>
+                            <span> {{item.taskName}} </span>
+                            <p> {{item.taskDescription}} </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--col 3 ends here-->
+        <!--col 4 starts here-->
+        <div class="col-3">
+            <div class="container">
+                <h2 class="done"> Done </h2>
+                <div cdkDropList [cdkDropListData]="Done" class="moviesList" (cdkDropListDropped)="drop($event)">
+                    <div class="box" *ngFor="let task of Done" cdkDrag>
+                        <div>
+                            <span> {{task.taskName}} </span>
+                            <p> {{task.taskDescription}} </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--col 4 ends here-->
+    </div>
+    <!--form body ends here-->
+</div>
+ <!--container-fluid ends here-->
+<app-footer></app-footer>
+
+
+

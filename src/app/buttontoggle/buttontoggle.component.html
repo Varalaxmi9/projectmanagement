@@ -1,0 +1,50 @@
+<div style="display:flex;flex-wrap:nowrap;font-size:20px;font-weight: bold;margin-top:5px;"> 
+    <p style="text-align:start;margin-right:70%;margin-left:10px;"> It is related to the material button toggle</p>
+    <a routerLink="/" style="text-decoration: none;"> Back to Home</a>
+</div>
+<!-- <h1> The users list length is {{users.length}}</h1>
+<div class="container-fluid">
+    <table>
+        <tr *ngFor = "let user of users" style="border:1px solid black">
+            <td>{{user.id}}</td>
+            <td>{{user.title}}</td>
+            <td>{{user.body}}</td>
+        </tr>
+    </table>
+</div> -->
+<p> Form using ngForm directive in angular </p>
+<div class="container">
+<form #ref="ngForm">
+    <h3 style="text-align: center; color:brown;font-weight: bold;font-size: 16px;padding-top:14px;padding-bottom:14px;margin-bottom: 0;"> Registration Form</h3>
+    <hr style="margin-top: 0;">
+    <div class="block">
+        <label for=""> Name </label>
+        <input type="text" name="name" ngModel>
+    </div>
+    <div class="block">
+        <label for=""> Password </label>
+        <input type="password" name="password" ngModel>
+    </div>
+    <div class="block">
+        <label for="">  Date of Birth</label>
+        <input type="date" name="dob" ngModel>
+    </div>
+    <button type="submit" class="btn btn-success" (click)="submitForm(ref)"> Submit </button>
+</form>
+<table *ngIf="submitted">
+    <tr>
+        <th *ngFor="let col of headers"> {{col | uppercase}} </th>
+    </tr>
+    <tr>
+        <td *ngFor="let user of users; let i=index">
+            <span> {{user}}</span>
+        
+            <button class="btn btn-warning" (click)="editUser(user, i)">
+                Edit
+            </button>
+        </td>
+    </tr>
+</table>
+</div>
+
+

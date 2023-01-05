@@ -1,0 +1,88 @@
+<p>reg-form works!</p>
+<div class="container">
+    <mat-toolbar>
+        <span> Angular Material Form</span>
+    </mat-toolbar>
+    <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
+                <div class="leftcolumn">
+                    <div class="form-group">
+                        <label for="firstName">First Name</label>
+                        <input type="text" formControlName="firstName" class="form-control" 
+                        [ngClass]="{ 'is-invalid': submitted && employeeForm.firstName.errors }"/>
+                        <div *ngIf="submitted && employeeForm.firstName.errors" class="invalid-feedback">
+                            <div *ngIf="employeeForm.firstName.errors.required">First Name is required</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" formControlName="email" placeholder="email"  class="form-control" 
+                        [ngClass]="{ 'is-invalid': submitted && employeeForm.email.errors }" />
+                        <div *ngIf="submitted && employeeForm.email.errors" class="alert alert-danger">
+                            <div *ngIf="employeeForm.email.errors.required">Email address is required</div>
+                            <div *ngIf="employeeForm.email.errors.pattern">Email address pattern mismatch</div>
+                        </div>
+                   
+                    </div>
+                    <div class="form-group">
+                        <label for="mobile"> Mobile </label>
+                        <input type="tel" formControlName="mobile" placeholder="mobile"  class="form-control" [ngClass]="{ 'is-invalid': submitted && employeeForm.mobile.errors }" />
+                        <div *ngIf="submitted && employeeForm.mobile.errors" class="invalid-feedback">
+                            <div *ngIf="employeeForm.mobile.errors.required">Mobile number is required</div>
+                            <div *ngIf="employeeForm.mobile.errors.pattern">Mobile number contains only numbers </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="city"> City</label>
+                        <input type="text" formControlName="city" placeholder="city"  class="form-control" [ngClass]="{ 'is-invalid': submitted && employeeForm.city.errors }" />
+                        <div *ngIf="submitted && employeeForm.city.errors" class="invalid-feedback">
+                            <div *ngIf="employeeForm.city.errors.required">city is required</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="rightcolumn">
+                    <!-- <div class="form-group" >
+                        <input type="radio"  name="gender" value="male" >
+                        <label for="male">Male</label><br>
+                        <input type="radio" name="gender" value="female" >
+                        <label for="female">Female</label><br>
+                        <input type="radio" name="gender" value="others">
+                        <label for="others">Others</label>
+                        <div *ngIf="submitted && employeeForm.gender.errors" class="invalid-feedback">
+                            <div *ngIf="employeeForm.gender.errors.required">gender is required</div>
+                        </div>
+                    </div> -->
+
+                    <div class="form-group">
+                        <label for="gender"> Select Gender : </label>
+                        <select name="gender" formControlName="gender" class="form-control" [ngClass]="{ 'is-invalid': submitted && employeeForm.gender.errors }">
+                            <option *ngFor="let gender of genders" value="{{gender}}" [ngModel]> {{gender}} </option>
+                        </select>
+                        <div *ngIf="submitted && employeeForm.gender.errors" class="invalid-feedback">
+                            <div *ngIf="employeeForm.gender.errors.required">gender is required</div>
+                        </div>
+                    </div>
+             
+                    <div class="form-group">
+                        <label for="department"> Select a Department : </label>
+                        <select name="department" formControlName="department" class="form-control" [ngClass]="{ 'is-invalid': submitted && employeeForm.department.errors }">
+                            <option *ngFor="let department of departments" value="{{department.name}}" [ngModel]> {{department.name}} </option>
+                        </select>
+                        <div *ngIf="submitted && employeeForm.department.errors" class="invalid-feedback">
+                            <div *ngIf="employeeForm.department.errors.required">department is required</div>
+                        </div>
+                    </div>
+                   
+                    <div class="form-group">
+                        <div class="addpadding">
+                            <input type="checkbox" formControlName="isPermanent" name="policy">
+                            <label for="policy">Is Permanent Employee </label>
+                        </div>
+                    </div>
+                 
+                    <div class="button-row text-center">
+                        <button class="btn btn-primary" [disabled]="employeeForm.invalid" type="submit"> Submit</button>
+                        <button class="btn btn-danger"  (click)="onClear()"> Clear</button>
+                    </div>
+                </div>
+    </form>
+</div>

@@ -1,0 +1,30 @@
+<mat-sidenav-container>
+  <mat-sidenav [(opened)]= "opened">
+    <mat-nav-list>
+      <a mat-list-item href="\" (click)="opened=true"> Home </a>
+      <a mat-list-item href="" (click)="opened=true"> Employees </a>
+      <a mat-list-item href="" (click)="opened = false"> Projects </a>
+      <a mat-list-item href="" (click)="opened=true"> Notes </a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+      <div *ngIf = "!opened">
+        <mat-nav-list>
+        <a mat-list-item href="\" > Project 1 </a>
+        <a mat-list-item href="" > Project 2 </a>
+        <a mat-list-item href="" >  Project 3 </a>
+        <a mat-list-item href="">  Project 4 </a>
+        <a href="" (click)="opened = true">
+          <mat-icon> arrow-back </mat-icon>
+        </a>
+      </mat-nav-list>
+      </div>
+      
+      <div>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Id asperiores voluptate, cumque accusamus ipsa modi quibusdam totam architecto! Natus, cum esse vitae dolorem quam similique. Similique dolor velit amet molestiae.
+      </p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam eveniet, iure odit animi tenetur dolorum voluptatibus dolor? Adipisci suscipit ullam eius, unde veniam nemo ratione sunt ab deserunt dignissimos incidunt?
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

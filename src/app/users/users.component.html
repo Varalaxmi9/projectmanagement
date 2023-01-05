@@ -1,0 +1,68 @@
+<app-button></app-button>
+<!-- style="background-color:rgb(225, 222, 221)" -->
+<div class="container-fluid">
+    <div class="mainhead">
+        <span> Users List  </span>
+        <!-- <button mat-raised-button color="warn" routerLink=""> Back</button> -->
+    </div>
+    <div class="tableheading">
+        <span *ngFor="let col of headers" class="heading">
+            {{col.header}}
+        </span>
+    </div>
+
+    <div class="data">
+        <table *ngIf="users.length > 0">
+            <tbody>
+                <tr *ngFor="let user of users">
+                    <td *ngFor="let col of headers" >
+                        <span *ngIf="col.field == 'id'">
+                            {{ user.id}}
+                        </span>
+                        <span *ngIf="col.field == 'name'">
+                            {{ user.name}}
+                        </span>
+                        <span *ngIf="col.field == 'username'">
+                            {{ user.username}}
+                        </span>
+                        <span *ngIf="col.field == 'email'">
+                            {{ user.email}}
+                        </span>
+                        <span *ngIf="col.field == 'address'">
+                            <p>{{ user.address.street}}
+                               {{ user.address.suite}}
+                              {{ user.address.city}}
+                               {{ user.address.zipcode}}
+                               {{ user.address.geo.lat}}
+                                {{ user.address.geo.lng}}</p>
+                            <!-- <div>
+                                <p> {{ user.address.street}}</p>
+                                <p> {{ user.address.suite}}</p>
+                                <p> {{ user.address.city}}</p>
+                                <p> {{ user.address.zipcode}}</p>
+                                <p> {{ user.address.geo.lat}}</p>
+                                <p> {{ user.address.geo.lng}}</p>
+                            </div>    -->
+                        </span>
+                        <span *ngIf="col.field == 'phone'">
+                            {{ user.phone}}
+                        </span>
+                        <span *ngIf="col.field == 'website'">
+                            {{ user.website}}
+                        </span>
+                        <span *ngIf="col.field == 'company'">
+                            {{ user.company.name}}
+                            {{ user.company.catchPhrase}}
+                            {{ user.company.bs}}
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table *ngIf="users.length == 0">
+            <p style="padding-left:650px;padding-top: 30px;font-weight:500;font-size:20px;color:orangered"> No data found </p>
+        </table>
+    </div>
+</div>
+<app-footer></app-footer>

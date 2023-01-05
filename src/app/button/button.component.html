@@ -1,0 +1,52 @@
+<!-- <div style="display:flex;flex-wrap:nowrap;font-size:20px;font-weight: bold;margin-top:5px;"> 
+    <p style="text-align:start;margin-right:70%;margin-left:10px;"> It is related to the material buttons</p>
+    <a routerLink="/" style="text-decoration: none;"> Back to Home</a>
+</div>
+
+<div class="btn">
+    <button mat-button>mat-button</button>
+    <button mat-raised-button> mat-raised-button </button>
+    <button mat-flat-button> mat-flat-button </button>
+    <button mat-stroked-button> mat-stroked-button </button>
+</div>
+
+<div class="btn">
+    <button mat-icon-button>mat-icon-button</button>
+    <button mat-fab> mat-fab is a icon button with background </button>
+    <button mat-mini-fab> mat-mini-fab is a icon button with background but smaller version </button>
+</div>
+
+<div class="btn">
+    <button color="primary" mat-button>primary color</button>
+    <button color="accent" mat-button>accent color</button>
+    <button color="warn" mat-button>warn color</button>
+</div>
+
+<div class="btn">
+    <button color="primary" mat-raised-button>primary color</button>
+    <button color="accent" mat-raised-button>accent color</button>
+    <button color="warn" mat-raised-button>warn color</button>
+</div>
+ -->
+ <mat-toolbar color="primary">
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+      <mat-icon>supervised_user_circle</mat-icon>
+    </button>
+
+    <span>Company Facilities of UI</span>
+    <span class="example-spacer"></span>
+
+    <button mat-raised-button color="warn" (click)="openModal()" *ngIf="registerBtn"> Register </button>
+
+    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+      <mat-icon>favorite</mat-icon>
+    </button> 
+  
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon" *ngIf="buttonVisible">
+      <mat-icon>share</mat-icon>
+    </button>    
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon" routerLink="/dashboard" *ngIf="!buttonVisible"> 
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+</mat-toolbar>
+
