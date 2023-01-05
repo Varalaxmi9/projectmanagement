@@ -2,16 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Users} from '../modal/users.model';
 
-// interface Users{
-//   id : number;
-//   name : string;
-//   email : string;
-//   address : string;
-//   mobile : string;
-//   profilepic : string;
-//   edit: boolean;
-// }
-
 @Component({
   selector: 'app-show-pic',
   templateUrl: './show-pic.component.html',

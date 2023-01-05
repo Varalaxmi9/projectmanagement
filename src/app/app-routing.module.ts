@@ -39,8 +39,8 @@ const routes: Routes = [
   {path: 'reports', component:DragDropComponent},
   {path: 'dialog', component:DialogComponent},
   {path : 'login', component:LoginComponent},
-  // {path: '', redirectTo:'dashboard', pathMatch:'full'},
-  {path: '', redirectTo:'reactive', pathMatch:'full'},
+  {path: '', redirectTo:'dashboard', pathMatch:'full'},
+  // {path: '', redirectTo:'reactive', pathMatch:'full'},
   {path: '**', component:ErrorComponent}
 ];
 
