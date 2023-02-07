@@ -56,10 +56,6 @@ export class LoginComponent implements OnInit, OnDestroy {
           else{
             this.route.navigate(['/short'], {queryParams: {id: resData.email}});
           }
-          // this.userService.authenticatedUser.subscribe( user => {
-          //   console.log(user);
-          // })
-          // this.route.navigate(['/dashboard'], {queryParams: {id: resData.email}});
         },errorMessage => {
           console.log(errorMessage);
           this.error = errorMessage;
