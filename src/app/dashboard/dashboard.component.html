@@ -1,11 +1,11 @@
 <app-button></app-button>
-<h3>
+  <h3>
     Good Morning
     <span
       style="color:rgb(43, 107,226); font-weight:bold;font-size:22px;margin-left:0;"
-      >Nishanth Padala
+      >{{loggedIn}}
     </span>
-    <span class="uicon2"> N </span>
+    <span class="uicon2"> {{firstLetter}} </span>
   </h3>
   
   <div class="container">
@@ -15,7 +15,7 @@
           <div class="uicon3">
             <i class="fas fa-user"></i>
           </div>
-          <span> <a routerLink="/users"> User Management </a> </span>
+          <span> <a routerLink="/users" *ngIf="isAdmin"> User Management </a> </span>
         </div>
       </div>
       <div class="col-sm-3">
@@ -23,19 +23,19 @@
           <div class="uicon3">
             <i class="fas fa-user-tie"></i>
           </div>
-          <span> <a routerLink="/hrmgmnt">HR Management  </a> </span>
+          <span> <a routerLink="/hrmgmnt" *ngIf="isAdmin">HR Management  </a> </span>
         </div>
       </div>
       <div class="col-sm-3">
         <div class="card bg-light">
           <div class="uicon3"><i class="fas fa-user-graduate"></i></div>
-          <span>  <a routerLink="/employeedetails"> Employee Details </a> </span>
+          <span>  <a routerLink="/employeedetails"  *ngIf="(isAdmin || isEmployee)"> Employee Details </a> </span>
         </div>
       </div>
       <div class="col-sm-3">
         <div class="card bg-light">
           <div class="uicon3"><i class="fas fa-user-tie"></i></div>
-          <span>  <a routerLink="/attendance"> Attendance </a> </span>
+          <span>  <a routerLink="/attendance" *ngIf="(isAdmin || isEmployee)"> Attendance </a> </span>
         </div>
       </div>
     </div>
@@ -45,7 +45,7 @@
           <div class="uicon3">
             <i class="fas fa-user"></i>
           </div>
-          <span>  <a routerLink="/tasknew"> Task Management</a> </span>
+          <span>  <a routerLink="/tasknew" *ngIf="(isAdmin || isEmployee)"> Task Management</a> </span>
         </div>
       </div>
       <div class="col-sm-3" style="margin-top:50px">
@@ -53,7 +53,7 @@
           <div class="uicon3">
             <i class="fas fa-user-tie"></i>
           </div>
-          <span>  <a routerLink="/reports"> Reports </a> </span>
+          <span>  <a routerLink="/reports" *ngIf="isAdmin"> Reports </a> </span>
         </div>
       </div>
     </div>

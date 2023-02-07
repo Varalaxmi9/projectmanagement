@@ -37,6 +37,8 @@
     <span class="example-spacer"></span>
 
     <button mat-raised-button color="warn" (click)="openModal()" *ngIf="registerBtn"> Register </button>
+<!-- 
+    <button mat-raised-button color="warn" (click)="openModal()" *ngIf="!isAuthenticated"> Register </button> -->
 
     <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
       <mat-icon>favorite</mat-icon>
@@ -45,8 +47,13 @@
     <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon" *ngIf="buttonVisible">
       <mat-icon>share</mat-icon>
     </button>    
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon" routerLink="/dashboard" *ngIf="!buttonVisible"> 
+
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon" (click)="routeknow()" *ngIf="backBtn"> 
       <mat-icon>arrow_back</mat-icon>
     </button>
+
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon" routerLink="/login" *ngIf="buttonVisible" matTooltip="Logout">
+      <mat-icon>person</mat-icon>
+    </button>  
 </mat-toolbar>
 

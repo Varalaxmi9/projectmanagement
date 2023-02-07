@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, NavigationEnd} from '@angular/router';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
@@ -6,10 +8,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  previousUrl: any;
+  currentUrl: any;
 
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor(private router: Router) {}
+  
+  ngOnInit(){
+ 
   }
-
 }

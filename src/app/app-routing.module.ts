@@ -21,27 +21,31 @@ import { TypographyComponent } from './typography/typography.component';
 import { UsersComponent } from './users/users.component';
 
 const routes: Routes = [
-  {path: 'dashboard', component:DashboardComponent },
-  // {path: '', component:HomeComponent},
+  {path: 'home', component:HomeComponent},
+  {path: 'button', component:ButtonComponent},
+    {path: 'login', component:LoginComponent},
+
   {path: 'footer', component:FooterComponent},
-  {path: 'typography', component:TypographyComponent },
-  {path: 'button', component:ButtonComponent },
-  {path: 'buttontoggle', component:ButtontoggleComponent},
-  {path: 'regForm', component:RegFormComponent},
-  {path: 'side', component:SidenavComponent},
+  {path: 'dialog', component:DialogComponent},
+  // {path: 'dashboard', component:DashboardComponent},
+
+  { path: 'full', component: DashboardComponent, data: { fullView: true } },
+  { path: 'short', component:  DashboardComponent, data: { fullView: false }},
+ 
   {path: 'users', component:UsersComponent},
-  {path: 'reactive', component:ReactiveFormComponent},
-  {path: 'attendance', component:AttendanceComponent},
   {path: 'hrmgmnt', component:ExamComponent},
   {path: 'employeedetails', component:ShowPicComponent},
+  {path: 'attendance', component:AttendanceComponent},
   {path: 'tasknew', component:TasknewComponent},
-  {path: 'bullet', component:BulletPointsComponent},
   {path: 'reports', component:DragDropComponent},
-  {path: 'dialog', component:DialogComponent},
-  {path : 'login', component:LoginComponent},
-  {path: '', redirectTo:'dashboard', pathMatch:'full'},
-  // {path: '', redirectTo:'reactive', pathMatch:'full'},
-  {path: '**', component:ErrorComponent}
+  {path: '', redirectTo:'home', pathMatch:'full'},
+  {path: '**', component:ErrorComponent},
+  // {path: 'typography', component:TypographyComponent },
+  // {path: 'buttontoggle', component:ButtontoggleComponent},
+  // {path: 'regForm', component:RegFormComponent},
+  // {path: 'side', component:SidenavComponent},
+  // {path: 'reactive', component:ReactiveFormComponent}, 
+  // {path: 'bullet', component:BulletPointsComponent},
 ];
 
 @NgModule({

@@ -3,7 +3,8 @@
       <div class="modal-body">
         <h4 class="modal-title"> Registration Form </h4>
         <!-- <button type="button" class="close" data-dismiss="modal" (click)="closeModal()">&times;</button> -->
-        <form [formGroup]="userForm" novalidate>
+        <div class="alert alert-danger" *ngIf="error">{{error}}</div>
+        <form [formGroup]="userForm" (ngSubmit)="userForm" style="margin-top:20px;">
         <div class="row">
             <div class="form-field col-12">
               <label for="name"> Name </label>
@@ -83,11 +84,11 @@
         </div>
         <div class="row" style="margin-top: 15px;">
           <div class="col-12">
-            <p> If you have already account please click on <a routerLink="/login" (click)="closeModal()">Login</a> here</p>
+            <p> If you have already account please click on <a routerLink="/login" (click)="closeModal()" >Login</a> here</p>
           </div>
         </div>
         <div class="buttons">
-          <button class="btn btn-primary submit" type="submit" [disabled]="!userForm.valid" (click)="addUser(userForm)"
+          <button class="btn btn-primary submit" type="submit" [disabled]="!userForm.valid" (click)="addUser(userForm)" 
             >Submit</button>
             <button class="btn btn-danger reset" type="button" (click)="resetForm()" 
             >Reset</button>

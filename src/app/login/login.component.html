@@ -3,21 +3,22 @@
     <div class="left">
       <div class="header">
         <h2 class="animation a1">Welcome Back</h2>
-        <h4 class="animation a2">Log in to your account using username and password</h4>
+        <h4 class="animation a2">Log in to your account using email and password</h4>
       </div>
-      <form [formGroup]="userForm" novalidate>
+      <div class="alert alert-danger" *ngIf="error" style="width:80%;color:red;">{{error}}</div>
+      <form [formGroup]="userForm" (ngSubmit)="userForm">
         <div class="row">
             <div class="col-12">
-                <!-- <label for="username"> Username </label> -->
-                <input type="text" name="username" class="form-control animation a3" formControlName="username" ngModel placeholder="Username">
+                <!-- <label for="email"> email </label> -->
+                <input type="email" name="email" class="form-control animation a3" formControlName="email" ngModel placeholder="email">
             </div>
-            <div *ngIf="userForm.controls['username'].invalid && (userForm.controls['username'].dirty || 
-            userForm.controls['username'].touched)" class="alert">
-                <div *ngIf="userForm.controls['username'].errors?.required">
-                please enter username
+            <div *ngIf="userForm.controls['email'].invalid && (userForm.controls['email'].dirty || 
+            userForm.controls['email'].touched)" class="alert">
+                <div *ngIf="userForm.controls['email'].errors?.required">
+                please enter email
                 </div>
-                <div *ngIf="userForm.controls['username'].errors?.minlength">
-                username must be atleast 5 chars
+                <div *ngIf="userForm.controls['email'].errors?.email">
+                    email should be like abc@gmail.com
                 </div>
             </div> 
         </div>
@@ -36,13 +37,14 @@
                 </div>
             </div>
         </div>
-        <p class="animation a5"><a href="#">Forgot Password</a></p>
-        <button class="animation a6">LOGIN</button>
+        <!-- <p class="animation a5"><a href="#">Forgot Password</a></p> -->
+        <button class="animation a6" type="submit" (click)="login(userForm)">LOGIN</button>
     </form>
      
     </div>
     <div class="right"></div>
   </div>
+  <!-- <app-dashboard [authenticate]="isAuthenticated" *ngIf="successfulLogin"></app-dashboard> -->
 
 
 

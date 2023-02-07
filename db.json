@@ -1,0 +1,22 @@
+{
+  "users": [
+    {
+      "name": "Varalaxmi ",
+      "email": "naman.varalaxmi@gmail.com",
+      "userName": "Vara9573",
+      "password": "$Vara123",
+      "confirmpassword": "$Vara123",
+      "id": 1
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}
